@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scmGit(branches: [[name: 'main']],
+                userRemoteConfigs: [
+                    [ url: 'https://github.com/Manoj0251/DevOpsRepo.git' ]
+                ])
+            }
+        }
+    }
+    post{
+    failure{
+        mail bcc: '', body: 'Testing Email ', cc: '', from: '', replyTo: '', subject: 'Test Subject', to: 'manojeee251@gmail.com'
+    }
+    }
+}
